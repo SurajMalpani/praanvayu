@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Praanvayu: understand air pollution, protect yourself, help clean the air</title>
+  <meta name="description" content="An interactive guide to air pollution in India: what's in the air, what causes it, how it affects health, how to protect yourself, and how to take action and volunteer for cleaner air.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo_mark.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="flagbar" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="site-header">
+    <div class="header-row">
+      <div class="brand">
+        <a href="#overview" class="brand-mark" data-goto="overview" aria-label="Praanvayu home: go to Overview">
+          <img src="img/logo_mark.png" alt="Praanvayu logo: lungs around a banyan tree" width="70" height="56">
+        </a>
+        <div class="brand-text">
+          <h1 class="logo">Praan<span class="v">vayu</span> <span class="deva">प्राणवायु</span></h1>
+          <p class="tagline">Understand the air you breathe, protect yourself, and help clean it up.</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn small primary" type="button" data-goto="act" data-anchor="volunteer">🙋 Volunteer</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-tab="overview">Overview</button>
+      <button role="tab" data-tab="learn">Learn</button>
+      <button role="tab" data-tab="protect">Protect yourself</button>
+      <button role="tab" data-tab="act">Take action &amp; volunteer</button>
+      <button role="tab" data-tab="resources">Resources &amp; references</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= OVERVIEW ================= -->
+    <section class="tab-panel" id="tab-overview" role="tabpanel">
+      <div class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">प्राणवायु · the breath of life</p>
+          <h2>We take about <span class="hl-t">20,000 breaths</span> a day. Most of them are polluted.</h2>
+          <p class="lead">Air pollution is India's biggest environmental health risk. It is invisible on most days, it doesn't stop at city or state borders, and it affects everyone, from a newborn to a grandparent. The good news: we know where it comes from, how to protect ourselves, and what works to clean it up.</p>
+          <div class="hero-cta">
+            <button class="btn primary" data-goto="sources">Learn what causes it →</button>
+            <button class="btn ghost" data-goto="act" data-anchor="volunteer">Join as a volunteer</button>
+          </div>
+        </div>
+        <div class="stat-grid" id="keyStats"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Read the AQI in ten seconds</h3>
+          <p>India's Air Quality Index turns readings of up to eight pollutants into one number from 0 to 500. Click a colour band to see what it means for your health and what to do<a class="ref" href="#references" data-ref="6">[6]</a>.</p>
+        </div>
+        <div class="aqi-scale" id="aqiScale" role="group" aria-label="AQI categories"></div>
+        <div class="aqi-ticks"><span>0</span><span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span></div>
+        <aside class="info aqi-info" id="aqiInfo" aria-live="polite"></aside>
+      </div>
+
+      <div class="three-col">
+        <a href="#learn" class="pillar t" data-goto="learn">
+          <h4>💨 Learn</h4>
+          <p>What <b>PM2.5</b> and other pollutants are, where they come from, why winters are worst, and what they do to the body.</p>
+          <span class="pillar-go">Start learning →</span>
+        </a>
+        <a href="#protect" class="pillar l" data-goto="protect">
+          <h4>🛡️ Protect</h4>
+          <p>A personal plan for any AQI: when to exercise, which <b>mask</b> works, how to size an <b>air purifier</b>, and myths to drop.</p>
+          <span class="pillar-go">Protect yourself →</span>
+        </a>
+        <a href="#act" class="pillar b" data-goto="act">
+          <h4>🌳 Act</h4>
+          <p>Check your clean-air habits, take the <b>pledge</b>, report polluters, and <b>volunteer</b> with Praanvayu in your city.</p>
+          <span class="pillar-go">Take action →</span>
+        </a>
+      </div>
+
+      <div class="card mission">
+        <img src="img/logo_full.png" alt="Praanvayu logo" width="190" height="196">
+        <div>
+          <p class="eyebrow">Our mission</p>
+          <h3>For clean air. For life.</h3>
+          <p>Praanvayu is a climate and public-health initiative working to reduce air pollution across India. Our goal is to bring the national average daily AQI below <b>100</b> within five years, and below <b>50</b> by 2035, so that everyone can breathe clean air.</p>
+          <p class="note">We do this through awareness, citizen science, community action and working with local governments. This guide is where it starts.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head row-between">
+          <div>
+            <h3>Quick check: eight questions</h3>
+            <p>Eight random questions from a bank of <span id="quizPool"></span>, different every time you load the page. The Learn tab explains the reasons behind each answer.</p>
+          </div>
+          <button class="btn small ghost" type="button" id="quizNew">↻ New questions</button>
+        </div>
+        <div id="quiz" class="quiz"></div>
+      </div>
+    </section>
+
+    <!-- ================= LEARN ================= -->
+    <section class="tab-panel" id="tab-learn" role="tabpanel" hidden>
+      <div class="section-intro">
+        <p class="eyebrow">Understand air pollution</p>
+        <h2>Learn about the air we breathe</h2>
+        <p class="lead">Three short guides: what's in polluted air, where it comes from, and what it does to us. Pick one to start.</p>
+        <div class="subtabs" role="tablist" aria-label="Learn topics">
+          <button role="tab" data-sub="air"><span>💨</span> What's in the air</button>
+          <button role="tab" data-sub="sources"><span>🏭</span> What causes it</button>
+          <button role="tab" data-sub="health"><span>🫁</span> Health effects</button>
+        </div>
+      </div>
+
+      <!-- ---------- What's in the air ---------- -->
+      <div class="sub-panel" id="learn-air" hidden>
+      <div class="sub-intro">
+        <h3>What's actually in the air?</h3>
+        <p>"Air pollution" is a mix of tiny particles and gases. India's AQI tracks eight of them. The most dangerous is the one you can't see: <b>PM2.5</b>. Pick a pollutant to learn where it comes from and what it does.</p>
+      </div>
+
+      <div class="card">
+        <div class="ptile-grid" id="polGrid"></div>
+        <div class="step-detail" id="polDetail" aria-live="polite"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>How small is PM2.5?</h3>
+          <p>Drawn to scale. A PM2.5 particle is about 30 times thinner than a human hair, small enough to slip past your nose and throat, deep into the lungs and into the blood<a class="ref" href="#references" data-ref="15">[15]</a>.</p>
+        </div>
+        <div class="size-wrap" id="sizeCompare"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>What does a PM2.5 reading mean?</h3>
+          <p>Slide to a 24-hour PM2.5 level to see its AQI category, how far it is above the limits, and a rough cigarette comparison. The cigarette figure is a way to grasp the scale of risk, not an exact equivalence.</p>
+        </div>
+        <div id="pmConv"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>India's standards vs the WHO guideline</h3>
+          <p>The WHO's 2021 guidelines<a class="ref" href="#references" data-ref="1">[1]</a> are based purely on health evidence. India's 2009 standards<a class="ref" href="#references" data-ref="7">[7]</a> are legal limits, set several times higher. Both are in µg/m³.</p>
+        </div>
+        <div class="std" id="stdBars"></div>
+        <p class="note" style="margin-top:12px">The WHO also sets interim targets as stepping stones; India's annual PM2.5 standard of 40 µg/m³ is close to its least strict interim target (35).</p>
+      </div>
+      <button class="btn ghost next-sub" type="button" data-sub-go="sources">Next: what causes it →</button>
+      </div>
+
+      <!-- ---------- What causes it ---------- -->
+      <div class="sub-panel" id="learn-sources" hidden>
+      <div class="sub-intro">
+        <h3>What causes air pollution?</h3>
+        <p>There is no single villain. Nearly all of it comes from <b>burning things</b>: coal and other fuels in factories and power plants, fuel in engines, wood in chulhas, straw in fields, garbage on streets. Ammonia from farms and dust add more, and about a quarter of India's PM2.5 blows in from beyond its borders. Weather then decides whether it blows away or piles up.</p>
+        <p>The mix is changing. As LPG has reached most homes, <b>household smoke</b> has dropped from the top source to second place nationally, and <b>industry</b> is now the biggest source inside India<a class="ref" href="#references" data-ref="18">[18]</a>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head row-between">
+          <div>
+            <h3>Who adds what: the pieces of India's PM2.5</h3>
+            <p>Each source's share of the fine particles (PM2.5) we breathe, adding up to about 100%. Switch between India as a whole and Delhi's own sources, then click a slice or a row.</p>
+          </div>
+          <div class="chips small" id="mixModes"></div>
+        </div>
+        <div id="mixChart"></div>
+        <p class="mini-h" style="margin-top:20px">What has changed</p>
+        <div class="shift-grid" id="mixShifts"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Explore each source</h3>
+          <p>Click a source to see what it emits, how much it adds, what's being done and what you can do.</p>
+        </div>
+        <div class="src-wrap">
+          <div class="src-grid" id="srcGrid"></div>
+          <aside class="info" id="srcInfo" aria-live="polite"></aside>
+        </div>
+        <p class="note" style="margin-top:14px">Every city's mix is different and changes with the season, which is why cities run source-apportionment studies. Pollution also travels: a large share of any city's PM2.5 usually comes from outside its borders.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-head row-between">
+            <div>
+              <h3>Why winter nights are worst</h3>
+              <p>Switch between the two scenes. The same emissions, very different air.</p>
+            </div>
+            <div class="chips small" id="invModes"></div>
+          </div>
+          <div class="inv-wrap" id="invDiagram"></div>
+          <p id="invNote" class="inv-note"></p>
+        </div>
+        <div class="card">
+          <h3>The pollution calendar</h3>
+          <p class="note">A typical year in the Indo-Gangetic Plain (Punjab to Bihar). Coastal and southern cities follow a milder pattern. Click a month.</p>
+          <div class="cal" id="polCal"></div>
+          <div class="step-detail" id="polCalDetail" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Don't forget indoor air</h3>
+        <div class="tool-grid">
+          <div class="tool"><h4>🍳 Cooking</h4><p>Frying and high-heat cooking release fine particles even on LPG. Use an exhaust fan or chimney, or open a window.</p></div>
+          <div class="tool"><h4>🪔 Incense, dhoop &amp; coils</h4><p>Agarbatti, dhoop and mosquito coils produce PM2.5. Use them sparingly and ventilate.</p></div>
+          <div class="tool"><h4>🔥 Chulhas &amp; angithis</h4><p>Wood, dung and coal smoke indoors can be many times worse than outdoor air, and coal heaters in closed rooms can cause deadly CO poisoning. Worldwide, household smoke was linked to about 32 lakh deaths in 2020<a class="ref" href="#references" data-ref="3">[3]</a>.</p></div>
+          <div class="tool"><h4>🚬 Tobacco smoke</h4><p>Second-hand smoke is one of the largest sources of indoor PM2.5. Keep homes and cars smoke-free.</p></div>
+          <div class="tool"><h4>🧴 Sprays &amp; paints</h4><p>Room fresheners, paints and some cleaners release VOCs. Choose low-VOC products and air out rooms.</p></div>
+          <div class="tool"><h4>🦠 Damp &amp; mould</h4><p>Leaks and damp walls grow mould that triggers asthma. Fix leaks and keep rooms dry.</p></div>
+        </div>
+      </div>
+      <button class="btn ghost next-sub" type="button" data-sub-go="health">Next: health effects →</button>
+      </div>
+
+      <!-- ---------- Health effects ---------- -->
+      <div class="sub-panel" id="learn-health" hidden>
+      <div class="sub-intro">
+        <h3>What dirty air does to the body</h3>
+        <p>Air pollution doesn't only cause coughs. Fine particles inflame the whole body, and the biggest toll is from heart attacks and strokes. Click a numbered spot on the body to see the evidence.</p>
+      </div>
+
+      <div class="stat-grid wide" id="healthStats"></div>
+
+      <div class="card">
+        <div class="body-wrap">
+          <div class="body-map" id="bodyMap"></div>
+          <div>
+            <div class="chips small" id="bodyList" style="margin-bottom:14px"></div>
+            <aside class="info" id="bodyInfo" aria-live="polite"></aside>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Who is most at risk?</h3>
+        <div class="tool-grid" id="riskGrid"></div>
+      </div>
+
+      <div class="card warn">
+        <h3>🚨 When to get medical help</h3>
+        <ul class="ticks">
+          <li>Chest pain or tightness, or a racing or irregular heartbeat</li>
+          <li>Breathlessness or wheezing that doesn't ease with your usual inhaler</li>
+          <li>A child breathing fast, with ribs pulling in, or too breathless to feed or talk</li>
+          <li>Headache, dizziness or confusion after using a heater or chulha in a closed room (possible CO poisoning: get to fresh air first)</li>
+        </ul>
+        <p class="note" style="margin:8px 0 0">This guide is educational and not a substitute for medical advice.</p>
+      </div>
+      <button class="btn primary next-sub" type="button" data-goto="protect">Next: how to protect yourself →</button>
+      </div>
+    </section>
+
+    <!-- ================= PROTECT ================= -->
+    <section class="tab-panel" id="tab-protect" role="tabpanel" hidden>
+      <div class="section-intro">
+        <p class="eyebrow">Practical steps for every AQI</p>
+        <h2>Protect yourself and your family</h2>
+        <p class="lead">You can't stop breathing, but you can cut how much pollution you breathe in by a lot: check the AQI, time your outdoor activity, clean the air indoors, and wear the right mask when it's bad.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Your action plan for today's AQI</h3>
+          <p>Set today's AQI from the CPCB or SAFAR apps and choose who you're planning for.</p>
+        </div>
+        <div id="planner"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card" id="masks">
+          <h3>😷 Which mask actually works?</h3>
+          <div class="table-wrap">
+            <table class="compare">
+              <thead><tr><th>Mask</th><th>Against PM2.5</th></tr></thead>
+              <tbody>
+                <tr><th>Cloth or scarf</th><td><span class="lvl low">Low</span> Fibres and gaps let most fine particles through.</td></tr>
+                <tr><th>Surgical</th><td><span class="lvl low">Low–medium</span> Better filter, but loose sides leak.</td></tr>
+                <tr><th>N95 / FFP2</th><td><span class="lvl high">High</span> Filters ≥ 95% (N95) or ≥ 94% (FFP2) of fine particles when it seals.</td></tr>
+                <tr><th>N99 / FFP3</th><td><span class="lvl high">Very high</span> Filters more, but is harder to breathe through.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mini-h" style="margin-top:12px">Getting the fit right</p>
+          <ul class="ticks">
+            <li>Use masks with two head straps and a metal nose clip; pinch the clip to your nose.</li>
+            <li>Breathe out hard: if air leaks around the edges, adjust it. Beards break the seal.</li>
+            <li>Replace when it's soiled, damaged or hard to breathe through.</li>
+            <li>Masks aren't safe for babies under 2. Protect young children by limiting exposure and cleaning indoor air.</li>
+          </ul>
+        </div>
+        <div class="card" id="purifier-card">
+          <h3>🏠 Clean the air indoors</h3>
+          <ul class="ticks">
+            <li><b>Close up on bad days.</b> Keep doors and windows shut when AQI is Poor or worse; air out briefly in the cleanest hours.</li>
+            <li><b>Run a HEPA purifier</b> in the room you spend the most time in, usually the bedroom.</li>
+            <li><b>Don't add to it.</b> No indoor burning, smoking, incense or candles on smoggy days.</li>
+            <li><b>Ventilate the kitchen</b> with a chimney or exhaust fan while cooking.</li>
+            <li><b>Wet-mop and damp-dust</b> instead of sweeping, which kicks particles back up.</li>
+            <li><b>DIY option:</b> a MERV-13 filter taped to a box fan is a proven low-cost cleaner.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" id="purifier">
+        <div class="card-head">
+          <h3>Purifier size calculator</h3>
+          <p>Enter your room size to find the minimum clean air delivery rate (CADR) to look for on the box.</p>
+        </div>
+        <div id="purifierCalc"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Myth or fact?</h3>
+          <p>Click a card to reveal the fact.</p>
+        </div>
+        <div class="myth-grid" id="myths"></div>
+      </div>
+
+      <div class="card">
+        <h3>More everyday habits</h3>
+        <div class="tool-grid">
+          <div class="tool"><h4>📱 Check before you step out</h4><p>Make AQI part of your weather check. The SAMEER app (CPCB) and SAFAR show hourly readings.</p></div>
+          <div class="tool"><h4>🛣️ Choose cleaner routes</h4><p>Walk or cycle on side streets and through parks; pollution drops sharply even a block away from heavy traffic.</p></div>
+          <div class="tool"><h4>🚗 In the car</h4><p>Keep windows up and set the AC to recirculate in heavy traffic. Replace the cabin filter regularly.</p></div>
+          <div class="tool"><h4>🏋️ Exercise smart</h4><p>Exercise is still good for you. On bad days, move it indoors or to the cleanest part of the day.</p></div>
+          <div class="tool"><h4>🥗 Look after yourself</h4><p>Stay hydrated, eat fruit and vegetables, and keep asthma and heart conditions well controlled.</p></div>
+          <div class="tool"><h4>🏫 Ask your school</h4><p>Ask schools to check AQI before outdoor assemblies and sports, and to run purifiers in classrooms.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAKE ACTION ================= -->
+    <section class="tab-panel" id="tab-act" role="tabpanel" hidden>
+      <div class="section-intro">
+        <p class="eyebrow">From breathing it to fixing it</p>
+        <h2>Take action for clean air</h2>
+        <p class="lead">Clean air is a shared resource: no one can buy it just for themselves. Every source in <a href="#sources" data-goto="sources">Learn → What causes it</a> can be cut, and each one needs people to change habits, speak up and organise. Start with yourself, then your street, then your city.</p>
+        <nav class="subnav" aria-label="Take action sections">
+          <a href="#habits" data-jump="habits">Your habits</a>
+          <a href="#pledge-card" data-jump="pledge-card">Take the pledge</a>
+          <a href="#community" data-jump="community">In your community</a>
+          <a href="#report" data-jump="report">Report &amp; speak up</a>
+          <a href="#volunteer" data-jump="volunteer" class="g">🙋 Volunteer</a>
+        </nav>
+      </div>
+
+      <div class="card" id="habits">
+        <div class="card-head">
+          <h3>1 · Your clean-air habits check</h3>
+          <p>Seven quick questions. There are no wrong answers, only next steps.</p>
+        </div>
+        <div class="habit-wrap">
+          <div id="habitsList"></div>
+          <aside class="info sticky" id="habitScore" aria-live="polite"></aside>
+        </div>
+      </div>
+
+      <div class="card" id="pledge-card">
+        <div class="card-head row-between">
+          <div>
+            <h3>2 · Take the clean-air pledge</h3>
+            <p>Tick the ones you'll commit to. Your choices are saved on this device.</p>
+          </div>
+          <button class="btn small ghost" type="button" id="pledgeShare">Share my pledge ↗</button>
+        </div>
+        <div class="pledge" id="pledge"></div>
+        <p class="note" id="pledgeStatus" style="margin-top:12px"></p>
+      </div>
+
+      <div class="card" id="community">
+        <h3>3 · In your community</h3>
+        <div class="tool-grid">
+          <div class="tool"><h4>🏘️ Make your colony burn-free</h4><p>Get your RWA to ban garbage and leaf burning, set up composting pits, and give guards and gardeners a number to call.</p></div>
+          <div class="tool"><h4>🏗️ Hold builders to dust rules</h4><p>Construction sites must cover materials, sprinkle water and screen the site. Ask for it, photograph violations and report them.</p></div>
+          <div class="tool"><h4>🚌 Organise car-pools &amp; walking buses</h4><p>Shared school runs and office car-pools cut traffic and exposure. Push for safe footpaths and cycle lanes.</p></div>
+          <div class="tool"><h4>🍲 Clean kitchens next door</h4><p>Help domestic workers, guards and nearby families access LPG through Ujjwala, and ventilate kitchens.</p></div>
+          <div class="tool"><h4>🌳 Green with care</h4><p>Plant native trees and protect existing ones. Trees help locally, but they can't replace cutting emissions.</p></div>
+          <div class="tool"><h4>🎉 Celebrate clean</h4><p>Organise cracker-free community Diwali, weddings and New Year with lights, music and food.</p></div>
+        </div>
+      </div>
+
+      <div class="card" id="report">
+        <h3>4 · Report pollution and speak up</h3>
+        <div class="two-col tight">
+          <ul class="ticks">
+            <li><b>SAMEER app (CPCB):</b> check hourly AQI and file complaints about garbage burning, dust, industrial smoke and more.</li>
+            <li><b>Swachhata app (MoHUA):</b> report garbage dumps and burning to your municipality.</li>
+            <li><b>State Pollution Control Board:</b> every state board takes complaints about factories, kilns and generators.</li>
+            <li><b>Delhi-NCR:</b> CAQM and the Green Delhi app handle complaints during GRAP periods<a class="ref" href="#references" data-ref="9">[9]</a>.</li>
+          </ul>
+          <ul class="ticks">
+            <li><b>Write to your MLA, MP and ward councillor.</b> Ask what your city is doing under NCAP<a class="ref" href="#references" data-ref="8">[8]</a> and where the money went.</li>
+            <li><b>Read your city's clean air plan</b> on the PRANA portal, and ask for progress reports.</li>
+            <li><b>Use RTI</b> to get data on monitoring stations, fines and enforcement.</li>
+            <li><b>Vote and talk about clean air.</b> When enough people treat it as an election issue, it becomes one.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lab-banner" id="volunteer">
+        <p class="eyebrow">Join Praanvayu</p>
+        <h2>🙋 Volunteer for clean air</h2>
+        <p class="lead">Whatever your skills or time, there's a way to help, from an hour a month to leading a campaign in your city. Pick the roles that interest you, then sign up below.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head row-between">
+          <h3>Choose how you'd like to help</h3>
+          <span class="note" id="roleCount">No roles selected yet</span>
+        </div>
+        <div class="role-grid" id="roleGrid"></div>
+      </div>
+
+      <div class="card">
+        <h3>Volunteer sign-up</h3>
+        <form id="volForm" class="vol-form" novalidate>
+          <label>Full name *<input class="input" name="name" required autocomplete="name"></label>
+          <label>Email *<input class="input" name="email" type="email" required autocomplete="email"></label>
+          <label>Phone / WhatsApp<input class="input" name="phone" type="tel" autocomplete="tel"></label>
+          <label>City / district *<input class="input" name="city" required autocomplete="address-level2"></label>
+          <fieldset class="full">
+            <legend>When are you available?</legend>
+            <label class="toggle"><input type="checkbox" name="time" value="Weekends"> Weekends</label>
+            <label class="toggle"><input type="checkbox" name="time" value="Weekday evenings"> Weekday evenings</label>
+            <label class="toggle"><input type="checkbox" name="time" value="Remote / online"> Remote / online</label>
+            <label class="toggle"><input type="checkbox" name="time" value="A few hours a month"> A few hours a month</label>
+          </fieldset>
+          <label class="full">Languages you speak<input class="input" name="lang" placeholder="e.g. Hindi, English, Marathi"></label>
+          <label class="full">Anything else? (skills, organisation, ideas)<textarea class="input" name="msg" rows="3"></textarea></label>
+          <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="toggle full"><input type="checkbox" name="consent" required> I agree that Praanvayu may contact me about volunteering. *</label>
+          <div class="full"><button class="btn primary" type="submit">Sign me up →</button> <span class="note">Your details go only to the Praanvayu volunteer team.</span></div>
+        </form>
+        <div id="volDone" hidden></div>
+      </div>
+    </section>
+
+    <!-- ================= RESOURCES ================= -->
+    <section class="tab-panel" id="tab-resources" role="tabpanel" hidden>
+      <div class="section-intro">
+        <p class="eyebrow">Go to the source</p>
+        <h2>Resources, references and glossary</h2>
+        <p class="lead">Live data, official portals, health evidence and independent research for checking the air, going deeper, and verifying every figure on this site.</p>
+      </div>
+      <div id="resourceGroups" class="resource-groups"></div>
+
+      <div class="two-col">
+        <div class="card" id="references">
+          <h3>References</h3>
+          <p class="note">Numbers in square brackets across the site link here.</p>
+          <ol class="refs" id="refList"></ol>
+        </div>
+        <div class="card">
+          <h3>Glossary</h3>
+          <input id="glossSearch" class="input" type="search" placeholder="Search terms…" aria-label="Search glossary">
+          <dl class="glossary" id="glossary"></dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="flagbar thin" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="footer-grid">
+      <div>
+        <p><b>Praanvayu</b> is an independent, citizen-led initiative that helps people understand air pollution and take action for cleaner air in their homes, neighbourhoods and cities.</p>
+        <p>This guide is educational. Figures come from WHO, CPCB, The Lancet Planetary Health, HEI and other sources listed in the Resources tab; check them before relying on any number. Nothing here is medical advice.</p>
+      </div>
+      <div>
+        <p><b>Contact</b><br>contact@praanvayu.org</p>
+        <div class="foot-btns">
+          <a class="foot-btn insta" href="https://www.instagram.com/_praanvayu_/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+            <span>Stay connected with us <b>@_praanvayu_</b></span>
+          </a>
+          <a class="foot-btn vol" href="#volunteer" data-goto="act" data-anchor="volunteer">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span>Help clean the air <b>Volunteer with us →</b></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Praanvayu</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/learn.js"></script>
+  <script src="js/act.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

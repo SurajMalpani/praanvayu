@@ -51,7 +51,9 @@
     picks.forEach((q, qi) => {
       const card = h('div', { class: 'q' }, `<p class="qtag">${q.t}</p><p class="qq">${qi + 1}. ${q.q}</p>`);
       const opts = h('div', { class: 'opts' });
-      shuffle(q.o.map((text, i) => ({ text, ok: i === q.a }))).forEach(o => {
+      // Fact-or-myth questions keep their Fact / Myth order; other options are shuffled.
+      const choices = q.o.map((text, i) => ({ text, ok: i === q.a }));
+      (q.o.length === 2 ? choices : shuffle(choices)).forEach(o => {
         const b = h('button', { type: 'button' }, o.text);
         if (o.ok) b.dataset.ok = '1';
         b.addEventListener('click', () => {

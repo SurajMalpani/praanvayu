@@ -491,3 +491,14 @@ table.compare.small { margin-top: 6px; background: #fff; border-radius: 10px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- local officials finder ---------- */
+.off { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: #FBFEFD; margin-top: 12px; }
+.off h4 { font-size: 1.02rem; margin-bottom: .3em; }
+.off a[href^="tel:"] { font-weight: 600; text-decoration: none; }
+.off-browse { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.off-browse .input { margin: 0; flex: 1 1 220px; max-width: 360px; }
+.off .ticks { margin: 4px 0 8px; }
+.off .ticks li { margin-bottom: 6px; }
+.off .note a { overflow-wrap: anywhere; }
+.off a[href^="tel:"], .off a[href^="https://wa.me"] { white-space: nowrap; }

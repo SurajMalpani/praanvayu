@@ -496,6 +496,7 @@ table.compare.small { margin-top: 6px; background: #fff; border-radius: 10px; }
 .foot-btn.vol { background: linear-gradient(45deg, var(--leaf-deep), var(--leaf) 55%, #9BC86A); box-shadow: 0 5px 14px rgba(63, 125, 32, .25); }
 .foot-btn.vol:hover { box-shadow: 0 8px 20px rgba(63, 125, 32, .34); }
 .site-footer .copy { margin-top: 10px; font-size: .8rem; }
+.site-footer .analytics-note { font-size: .74rem; font-weight: 400; opacity: .7; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

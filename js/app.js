@@ -23,6 +23,14 @@
   // Anchors inside a tab (e.g. #volunteer) open their tab, then scroll.
   const ANCHOR_TAB = { volunteer: 'act', 'pledge-card': 'act', habits: 'act', solutions: 'act', community: 'act', report: 'act', officials: 'act', purifier: 'protect', masks: 'protect', references: 'resources' };
 
+  // Analytics: one event per tab or Learn topic viewed. Does nothing if Google Analytics is blocked.
+  let lastView = null;
+  function track(name) {
+    if (name === lastView || typeof window.gtag !== 'function') return;
+    lastView = name;
+    window.gtag('event', 'tab_view', { tab_name: name });
+  }
+
   function setHash(h) {
     try { history.replaceState(null, '', '#' + h); } catch (e) { /* some browsers block this on file:// */ }
   }
@@ -49,6 +57,7 @@
     });
     document.querySelectorAll('.sub-panel').forEach(p => { p.hidden = p.id !== 'learn-' + id; });
     if (!rendered.has('sub-' + id) && PV.render[id]) { rendered.add('sub-' + id); PV.render[id](); }
+    track('learn/' + id);
   }
 
   function show(id, push) {
@@ -63,6 +72,7 @@
     document.querySelectorAll('.tab-panel').forEach(p => { p.hidden = p.id !== 'tab-' + id; });
     if (!rendered.has(id) && PV.render[id]) { rendered.add(id); PV.render[id](); }
     if (push) setHash(id === 'learn' ? currentSub : id);
+    if (id !== 'learn') track(id);
     const active = tabs.find(t => t.dataset.tab === id);
     if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
@@ -159,3 +169,12 @@
   });
   document.querySelectorAll('a.wa').forEach(a => io.observe(a));
 })();
+
+// Analytics: count clicks on any "join our WhatsApp community" link, and where on the page it was.
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href*="chat.whatsapp.com"]');
+  if (!a || typeof window.gtag !== 'function') return;
+  const panel = a.closest('.tab-panel');
+  const where = a.id === 'waFab' ? 'floating_button' : a.closest('footer') ? 'footer' : panel ? panel.id.replace('tab-', '') : 'other';
+  window.gtag('event', 'join_whatsapp_click', { link_location: where });
+});

@@ -221,7 +221,7 @@ PV.stats = [
   [99, '% of people worldwide breathe air above WHO guideline levels [2]', v => Math.round(v)],
   [20, 'lakh deaths in India linked to air pollution in 2023 [19]', v => Math.round(v) + '+'],
   [186, 'air-pollution deaths per lakh people in India in 2023, vs 17 in high-income countries [19]', v => Math.round(v)],
-  [8, '× India\u2019s annual PM2.5 standard vs the WHO guideline (40 vs 5 µg/m³)', v => Math.round(v)]
+  [3.5, 'years of life the average Indian stands to lose to today\u2019s air; 8.2 years in Delhi [13]', v => v.toFixed(1)]
 ];
 
 // [label, url, description]
@@ -273,7 +273,7 @@ PV.references = [
   'International Agency for Research on Cancer (2016). <i>Outdoor Air Pollution.</i> IARC Monographs on the Evaluation of Carcinogenic Risks to Humans, Volume 109.',
   'Cummings, B. E. & Waring, M. S. (2020). Potted plants do not improve indoor air quality: a review and analysis of reported VOC removal efficiencies. <i>Journal of Exposure Science & Environmental Epidemiology</i> 30: 253–261.',
   'Muller, R. A. & Muller, E. A. (2015). <i>Air Pollution and Cigarette Equivalence.</i> Berkeley Earth.',
-  'Energy Policy Institute at the University of Chicago (EPIC). <i>Air Quality Life Index</i>, annual update.',
+  'Energy Policy Institute at the University of Chicago (EPIC) (2025). <i>Air Quality Life Index</i>, 2025 annual update, using 2023 data: all 1.4 billion Indians live where annual PM2.5 is above the WHO guideline; meeting the guideline would add about 3.5 years to average life expectancy in India and 8.2 years in Delhi.',
   'US Environmental Protection Agency (2018). <i>Guide to Air Cleaners in the Home</i>, 3rd edition; and AHAM\u2019s "two-thirds rule" for sizing CADR.',
   'US Environmental Protection Agency. <i>Particulate Matter (PM) Basics.</i>',
   'Supreme Court of India (2018). <i>Arjun Gopal v. Union of India</i>, order on firecrackers and "green crackers".',

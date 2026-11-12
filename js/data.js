@@ -290,7 +290,9 @@ PV.references = [
   'Punjab Pollution Control Board, reported by ANI (10 November 2026): 4,657 stubble-burning incidents in Punjab up to 9 November 2026; the season runs to 30 November.',
   'Ministry of Environment, Forest and Climate Change, Lok Sabha reply of 10 August 2026, reported by <i>ThePrint</i>: 130 NCAP cities; 26 met the target of a 40% cut in PM10 by 2025–26, and 14 met the PM10 standard of 60 µg/m³.',
   'Department-related Parliamentary Standing Committee on Science and Technology, Environment, Forest and Climate Change (December 2025), reported by PTI: government asked to notify updated air quality norms. India\u2019s NAAQS were last notified in 2009; the review began in 2020.',
-  'International Agency for Research on Cancer (2012). Press release No. 213: diesel engine exhaust classified as carcinogenic to humans (Group 1).'
+  'International Agency for Research on Cancer (2012). Press release No. 213: diesel engine exhaust classified as carcinogenic to humans (Group 1).',
+  'Commission for Air Quality Management in NCR and Adjoining Areas (August 2024). Advisory asking Resident Welfare Associations and residential societies in Delhi to provide electric heaters to security and service staff, to curb open burning of biomass and waste in winter; reported by PTI.',
+  'Ministry of New and Renewable Energy. <i>PM Surya Ghar: Muft Bijli Yojana</i>, launched February 2024: central subsidy for household rooftop solar, up to ₹78,000 for systems of 3 kW and above.'
 ];
 
 PV.glossary = [

@@ -1,7 +1,6 @@
 // Action tabs: protect yourself, take action, volunteer.
 (function () {
   const { h, chipGroup, store, bandFor, cite } = PV.ui;
-  const CONTACT = 'contact@praanvayu.org';
 
   /* ======================= PROTECT ======================= */
   // Advice by AQI band (0 = Good … 5 = Severe) and group.
@@ -146,6 +145,55 @@
     score();
   }
 
+  // Everyday solutions: [category, icon, title, text, tag]. Tags: free, save (saves money), cost (small cost), once (one-time switch).
+  const SOL_CATS = [['travel', '🚲 Getting around'], ['home', '🍳 Kitchen & home'], ['waste', '♻️ Waste'], ['energy', '💡 Energy'], ['season', '🧣 Winter & festivals'], ['all', 'All']];
+  const SOL_TAGS = { free: 'Free', save: 'Saves money', cost: 'Small cost', once: 'One-time switch' };
+  const SOLUTIONS = [
+    ['travel', '🚶', 'Walk or cycle the short trips', 'Engines pollute most in the first few minutes, before they warm up, so short drives are the dirtiest per kilometre. For anything under 2 km, go on foot or by cycle.', 'free'],
+    ['travel', '🚇', 'Share the commute', 'Vehicles make up about half of the PM2.5 from Delhi’s own sources in winter [24]. Swap two solo car days a week for the metro, a bus or a car-pool.', 'save'],
+    ['travel', '🔧', 'Service on time, keep the PUC valid', 'A poorly tuned engine can emit several times more. A clean air filter and correctly inflated tyres also cut your fuel bill.', 'save'],
+    ['travel', '🚦', 'Engine off when you wait', 'Switch off at signals longer than 30 seconds, at railway crossings and outside school gates, where children breathe the exhaust.', 'free'],
+    ['travel', '📦', 'Fewer, slower deliveries', 'Combine your orders and skip ten-minute delivery when you can wait. Every rush order is one more vehicle trip.', 'free'],
+    ['travel', '⚡', 'Make your next vehicle electric', 'No tailpipe exhaust at street level. Scooters and autos are the easiest switch, and CNG is a cleaner step than diesel.', 'once'],
+
+    ['home', '🔥', 'Cook on LPG, PNG or induction', 'Clean cooking protects the cook first, then the street. Keep wood, coal and kerosene out of the kitchen, and check eligibility for an Ujjwala connection.', 'once'],
+    ['home', '🌬️', 'Vent the kitchen', 'Run a chimney or exhaust fan, or open a window, while frying and for a few minutes after. Even LPG cooking releases fine particles.', 'free'],
+    ['home', '🪔', 'Go easy on incense and coils', 'Agarbatti, dhoop and mosquito coils all give off PM2.5. Use nets and window screens, and light incense sparingly with a window open.', 'free'],
+    ['home', '🚭', 'Keep home and car smoke-free', 'Tobacco smoke is one of the largest sources of indoor PM2.5, and it lingers in rooms and car seats long after the cigarette is out.', 'free'],
+    ['home', '🎨', 'Choose low-VOC paints and cleaners', 'Pick water-based, low-VOC paints and skip aerosol room fresheners. VOCs pollute the room and help form ozone outdoors.', 'cost'],
+    ['home', '🏗️', 'Renovate without the dust', 'Cover sand and debris, cut tiles and stone wet, and send debris away in covered vehicles. Ask for fly-ash or AAC blocks instead of kiln-fired bricks.', 'cost'],
+
+    ['waste', '🚫', 'Never burn garbage or leaves', 'It is banned under the Solid Waste Management Rules [17] and puts toxic smoke at nose height. If you see a fire, report it on the Swachhata or SAMEER app.', 'free'],
+    ['waste', '🗑️', 'Segregate wet, dry and hazardous', 'Sorted waste gets collected and recycled. Mixed waste is what ends up dumped, set alight or feeding landfill fires.', 'free'],
+    ['waste', '🌱', 'Compost peels and leaves', 'A bin, a pit or a terracotta composter turns kitchen scraps into manure. Spread fallen leaves as mulch around plants instead of sweeping them into a pile to burn.', 'save'],
+    ['waste', '🛍️', 'Carry your own bag and bottle', 'Less packaging means less plastic to be dumped or burned, and burning plastic gives off some of the most toxic smoke there is.', 'free'],
+    ['waste', '🔋', 'Send e-waste to authorised recyclers', 'Hand in old phones, batteries and cables at authorised collection points. Informal recycling often burns or smelts them in the open, releasing lead.', 'free'],
+
+    ['energy', '💡', 'Use less power', 'Coal power plants add about 13% of the PM2.5 Indians breathe [18]. Fit LEDs, switch off at the plug and run full loads in the washing machine.', 'save'],
+    ['energy', '❄️', 'Set the AC to 24–26°C', 'Each degree warmer saves electricity. Use a ceiling fan along with the AC, and choose 5-star appliances when you replace old ones.', 'save'],
+    ['energy', '☀️', 'Put solar on your roof', 'Rooftop panels cut the coal burned for your home. The PM Surya Ghar scheme gives households a central subsidy of up to ₹78,000 [32].', 'once'],
+    ['energy', '🔌', 'Back up with batteries, not diesel', 'Diesel generators push exhaust out at street level, and diesel exhaust is a known cause of cancer [30]. Use an inverter at home and ask your society to move to cleaner backup.', 'once'],
+
+    ['season', '🧣', 'Stay warm without a fire', 'Use layers, blankets and an electric heater instead of an angithi or bonfire. Never burn coal or wood in a closed room: it can cause deadly CO poisoning.', 'free'],
+    ['season', '💂', 'Give your guard a heater', 'Night guards often burn wood or waste to keep warm. CAQM has asked Delhi’s RWAs to give security and service staff electric heaters [31]; any household or society can do the same.', 'cost'],
+    ['season', '🎆', 'Celebrate without crackers', 'A few hours of fireworks can hang in still winter air for days. Mark Diwali, weddings and New Year with diyas, lights and music.', 'save'],
+    ['season', '🌫️', 'Emit less on smog days', 'When the AQI is Very Poor or worse, work from home if you can, combine or postpone car trips, and put off painting and construction work.', 'free'],
+    ['season', '🌾', 'If your family farms, don’t burn straw', 'Sow through the stubble with a Happy Seeder, spray the Pusa bio-decomposer, or sell straw for pellets and biogas.', 'once']
+  ];
+
+  function solutions() {
+    const grid = document.getElementById('solGrid');
+    const count = document.getElementById('solCount');
+    const draw = cat => {
+      const list = SOLUTIONS.filter(s => cat === 'all' || s[0] === cat);
+      grid.innerHTML = list.map(([, ic, t, d, tag]) => `
+        <div class="sol"><span class="sol-i" aria-hidden="true">${ic}</span><div><h4>${t}</h4><p>${cite(d)}</p><span class="sol-tag ${tag}">${SOL_TAGS[tag]}</span></div></div>`).join('');
+      count.textContent = `${list.length} of ${SOLUTIONS.length} solutions shown`;
+    };
+    chipGroup(document.getElementById('solCats'), SOL_CATS, 'travel', draw, 'g');
+    draw('travel');
+  }
+
   const PLEDGES = [
     'I will check the AQI before outdoor exercise and plan around bad-air hours.',
     'I will never burn garbage, plastic or leaves, and will report open burning.',
@@ -180,87 +228,20 @@
   }
 
   const ROLES = [
-    ['ambassador', '📣', 'Clean Air Ambassador', 'Run short awareness sessions in your colony, RWA, office or place of worship.'],
-    ['schools', '🎒', 'School & college clubs', 'Help students start Clean Air Clubs, read the AQI and run poster and pledge drives.'],
-    ['science', '📡', 'Citizen science', 'Host or maintain a low-cost sensor, log readings and help map local hotspots.'],
+    ['ambassador', '📣', 'Clean Air Ambassador', 'Run awareness sessions in your colony, RWA, school, college or office, from reading the AQI to mask-fitting and pledge drives.'],
     ['green', '🌳', 'Green cover drives', 'Plant and care for native trees (neem, peepal, arjun) and protect urban green belts.'],
     ['burnfree', '🔥', 'Burn-free campaigns', 'Work with farmers, waste workers and RWAs on alternatives to burning.'],
-    ['health', '🩺', 'Health camps', 'Support doctors and nurses at lung-health screenings and mask-fitting sessions.'],
-    ['data', '💻', 'Data & tech', 'Build dashboards, maps and tools like this site.'],
-    ['story', '🎨', 'Design & storytelling', 'Make posters and reels, and translate content into regional languages.'],
-    ['policy', '📜', 'Policy & research', 'Track NCAP city plans, file RTIs and prepare briefs for local officials.']
+    ['policy', '📜', 'Policy & research', 'Track NCAP city plans, file RTIs, log sensor readings to map local hotspots and prepare briefs for local officials.'],
+    ['story', '🎨', 'Design & storytelling', 'Make posters and reels, translate content into regional languages, and build maps and tools like this site.']
   ];
 
   function volunteer() {
     const grid = document.getElementById('roleGrid');
-    const chosen = new Set();
     grid.innerHTML = '';
     ROLES.forEach(([id, ic, n, d]) => {
-      const b = h('button', { type: 'button', class: 'role', 'aria-pressed': 'false' }, `<span class="ri">${ic}</span><b>${n}</b><small>${d}</small><span class="rcheck">✓ Selected</span>`);
-      b.addEventListener('click', () => {
-        if (chosen.has(id)) chosen.delete(id); else chosen.add(id);
-        b.setAttribute('aria-pressed', String(chosen.has(id)));
-        document.getElementById('roleCount').textContent = chosen.size ? `${chosen.size} role${chosen.size > 1 ? 's' : ''} selected` : 'No roles selected yet';
-      });
-      grid.appendChild(b);
-    });
-
-    const form = document.getElementById('volForm');
-    const done = document.getElementById('volDone');
-    const submitBtn = form.querySelector('[type=submit]');
-    const esc = s => s.replace(/[<>&"]/g, '');
-    const endpoint = (PV.config && PV.config.volunteerEndpoint || '').trim();
-
-    function finish(v, sent) {
-      const body = [
-        `Name: ${v.name}`, `Email: ${v.email}`, `Phone: ${v.phone || '-'}`, `City: ${v.city}`,
-        `Roles: ${v.roles || 'Open to anything'}`, `Availability: ${v.availability || '-'}`,
-        `Languages: ${v.languages || '-'}`, '', v.message
-      ].join('\n');
-      const mail = `mailto:${CONTACT}?subject=${encodeURIComponent('Volunteer sign-up: ' + v.name + ' (' + v.city + ')')}&body=${encodeURIComponent(body)}`;
-      form.hidden = true;
-      done.hidden = false;
-      done.innerHTML = `
-        <div class="verdict pass">
-          <div class="big">Thank you, ${esc(v.name.split(' ')[0])}! 🌿</div>
-          ${sent
-            ? `<p>We\u2019ve received your sign-up. A Praanvayu coordinator for <b>${esc(v.city)}</b> will get in touch at <b>${esc(v.email)}</b>.</p>`
-            : `<p>Your details are ready. Send them to the Praanvayu team so a coordinator in <b>${esc(v.city)}</b> can reach you.</p>`}
-          <div class="hero-cta">
-            ${sent ? '' : `<a class="btn primary" href="${mail}">✉️ Send my sign-up by email</a>`}
-            <button class="btn ghost" type="button" id="volAgain">Sign up someone else</button>
-          </div>
-          ${sent ? '' : `<p class="note" style="margin:12px 0 0">Can\u2019t send email from this device? Write to <b>${CONTACT}</b> with the same details.</p>`}
-        </div>`;
-      done.querySelector('#volAgain').addEventListener('click', () => { form.reset(); form.hidden = false; done.hidden = true; });
-    }
-
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
-      const fd = new FormData(form);
-      const v = {
-        name: fd.get('name').trim(), email: fd.get('email').trim(), phone: fd.get('phone').trim(), city: fd.get('city').trim(),
-        roles: ROLES.filter(r => chosen.has(r[0])).map(r => r[2]).join(', '),
-        availability: fd.getAll('time').join(', '), languages: fd.get('lang').trim(), message: fd.get('msg').trim()
-      };
-      // Bots fill the hidden "website" field; humans never see it.
-      if (fd.get('website')) { finish(v, true); return; }
-      if (!endpoint) { finish(v, false); return; }
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-      try {
-        // Apps Script web apps don't return CORS headers, so the response is opaque; a network failure still throws.
-        await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(v) });
-        finish(v, true);
-      } catch (err) {
-        finish(v, false);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Sign me up →';
-      }
+      grid.appendChild(h('div', { class: 'role' }, `<span class="ri">${ic}</span><b>${n}</b><small>${d}</small>`));
     });
   }
 
-  PV.render.act = function () { habits(); pledge(); volunteer(); };
+  PV.render.act = function () { habits(); solutions(); pledge(); volunteer(); };
 })();

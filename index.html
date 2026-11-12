@@ -44,11 +44,19 @@
       <div class="hero">
         <div class="hero-text">
           <p class="eyebrow">प्राणवायु · the breath of life</p>
-          <h2>We take about <span class="hl-t">20,000 breaths</span> a day. Most of them are polluted.</h2>
+          <div class="hero-deck" id="heroDeck" role="group" aria-roledescription="carousel" aria-label="Air pollution facts">
+            <div class="hero-slides">
+              <h2 class="hero-slide is-on">We take about <span class="hl-t">20,000 breaths</span> a day. Most of them are polluted.</h2>
+              <h2 class="hero-slide" aria-hidden="true">A PM2.5 particle is <span class="hl-t">30 times thinner</span> than a human hair. Small enough to reach your blood<a class="ref" href="#references" data-ref="15">[15]</a>.</h2>
+              <h2 class="hero-slide" aria-hidden="true">About <span class="hl-t">1 in 8 deaths</span> worldwide is linked to air pollution<a class="ref" href="#references" data-ref="19">[19]</a>.</h2>
+              <h2 class="hero-slide" aria-hidden="true">A day of Delhi’s winter air carries a risk like smoking about <span class="hl-t">five cigarettes</span><a class="ref" href="#references" data-ref="12">[12]</a>.</h2>
+            </div>
+            <div class="hero-dots" id="heroDots"></div>
+          </div>
           <p class="lead">Air pollution is India's biggest environmental health risk. It is invisible on most days, it doesn't stop at city or state borders, and it affects everyone, from a newborn to a grandparent. The good news: we know where it comes from, how to protect ourselves, and what works to clean it up.</p>
           <div class="hero-cta">
             <button class="btn primary" data-goto="sources">Learn what causes it →</button>
-            <button class="btn ghost" data-goto="act" data-anchor="volunteer">Join as a volunteer</button>
+            <a class="btn ghost wa" href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer"><svg class="wa-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Join our volunteer community</a>
           </div>
         </div>
         <div class="stat-grid" id="keyStats"></div>
@@ -77,7 +85,7 @@
         </a>
         <a href="#act" class="pillar b" data-goto="act">
           <h4>🌳 Act</h4>
-          <p>Check your clean-air habits, take the <b>pledge</b>, report polluters, and <b>volunteer</b> with Praanvayu in your city.</p>
+          <p>Check your habits, pick <b>everyday solutions</b>, take the <b>pledge</b>, report polluters, and <b>volunteer</b> with Praanvayu in your city.</p>
           <span class="pillar-go">Take action →</span>
         </a>
       </div>
@@ -349,11 +357,12 @@
         <p class="lead">Clean air is a shared resource: no one can buy it just for themselves. Every source in <a href="#sources" data-goto="sources">Learn → What causes it</a> can be cut, and each one needs people to change habits, speak up and organise. Start with yourself, then your street, then your city.</p>
         <nav class="subnav" aria-label="Take action sections">
           <a href="#habits" data-jump="habits">Your habits</a>
+          <a href="#solutions" data-jump="solutions">Everyday solutions</a>
           <a href="#pledge-card" data-jump="pledge-card">Take the pledge</a>
           <a href="#community" data-jump="community">In your community</a>
           <a href="#report" data-jump="report">Report &amp; speak up</a>
           <a href="#officials" data-jump="officials">Find your officials</a>
-          <a href="#volunteer" data-jump="volunteer" class="g">🙋 Volunteer</a>
+          <a href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer" class="g wa"><svg class="wa-ico" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Join our volunteer community</a>
         </nav>
       </div>
 
@@ -368,10 +377,24 @@
         </div>
       </div>
 
+      <div class="card" id="solutions">
+        <div class="card-head">
+          <h3>2 · Everyday solutions for cleaner air</h3>
+          <p>Things one person or one household can do, grouped by where they fit in your day. Most cost nothing and many save money. Pick a category, then choose one or two to start this week.</p>
+        </div>
+        <div class="chips small" id="solCats" role="group" aria-label="Solution categories"></div>
+        <div class="sol-grid" id="solGrid" aria-live="polite"></div>
+        <div class="sol-foot">
+          <span class="note" id="solCount"></span>
+          <span class="sol-key"><span class="sol-tag free">Free</span><span class="sol-tag save">Saves money</span><span class="sol-tag cost">Small cost</span><span class="sol-tag once">One-time switch</span></span>
+        </div>
+        <p class="note" style="margin:12px 0 0">One household's share is small; the same step taken across a colony or a city is not. The largest sources, industry and power plants<a class="ref" href="#references" data-ref="18">[18]</a>, also need rules and enforcement, so <a href="#report" data-jump="report">reporting and speaking up</a> matter as much as habits.</p>
+      </div>
+
       <div class="card" id="pledge-card">
         <div class="card-head row-between">
           <div>
-            <h3>2 · Take the clean-air pledge</h3>
+            <h3>3 · Take the clean-air pledge</h3>
             <p>Tick the ones you'll commit to. Your choices are saved on this device.</p>
           </div>
           <button class="btn small ghost" type="button" id="pledgeShare">Share my pledge ↗</button>
@@ -381,7 +404,7 @@
       </div>
 
       <div class="card" id="community">
-        <h3>3 · In your community</h3>
+        <h3>4 · In your community</h3>
         <div class="tool-grid">
           <div class="tool"><h4>🏘️ Make your colony burn-free</h4><p>Get your RWA to ban garbage and leaf burning, set up composting pits, and give guards and gardeners a number to call.</p></div>
           <div class="tool"><h4>🏗️ Hold builders to dust rules</h4><p>Construction sites must cover materials, sprinkle water and screen the site. Ask for it, photograph violations and report them.</p></div>
@@ -393,7 +416,7 @@
       </div>
 
       <div class="card" id="report">
-        <h3>4 · Report pollution and speak up</h3>
+        <h3>5 · Report pollution and speak up</h3>
         <div class="two-col tight">
           <ul class="ticks">
             <li><b>SAMEER app (CPCB):</b> check hourly AQI and file complaints about garbage burning, dust, industrial smoke and more.</li>
@@ -412,7 +435,7 @@
 
       <div class="card" id="officials">
         <div class="card-head">
-          <h3>5 · Find your local officials</h3>
+          <h3>6 · Find your local officials</h3>
           <p>Municipal helplines, ward offices and pollution control boards that handle garbage pickup (ghanta gaadi), open burning and dust complaints. Search by pin code or city, anywhere in India.</p>
         </div>
         <div id="officialsFinder"></div>
@@ -421,38 +444,15 @@
       <div class="lab-banner" id="volunteer">
         <p class="eyebrow">Join Praanvayu</p>
         <h2>🙋 Volunteer for clean air</h2>
-        <p class="lead">Whatever your skills or time, there's a way to help, from an hour a month to leading a campaign in your city. Pick the roles that interest you, then sign up below.</p>
+        <p class="lead">Whatever your skills or time, there's a way to help, from an hour a month to leading a campaign in your city. See where you could fit in, then join our WhatsApp community to get started.</p>
       </div>
 
       <div class="card">
-        <div class="card-head row-between">
-          <h3>Choose how you'd like to help</h3>
-          <span class="note" id="roleCount">No roles selected yet</span>
-        </div>
+        <h3>Ways you can help</h3>
         <div class="role-grid" id="roleGrid"></div>
-      </div>
-
-      <div class="card">
-        <h3>Volunteer sign-up</h3>
-        <form id="volForm" class="vol-form" novalidate>
-          <label>Full name *<input class="input" name="name" required autocomplete="name"></label>
-          <label>Email *<input class="input" name="email" type="email" required autocomplete="email"></label>
-          <label>Phone / WhatsApp<input class="input" name="phone" type="tel" autocomplete="tel"></label>
-          <label>City / district *<input class="input" name="city" required autocomplete="address-level2"></label>
-          <fieldset class="full">
-            <legend>When are you available?</legend>
-            <label class="toggle"><input type="checkbox" name="time" value="Weekends"> Weekends</label>
-            <label class="toggle"><input type="checkbox" name="time" value="Weekday evenings"> Weekday evenings</label>
-            <label class="toggle"><input type="checkbox" name="time" value="Remote / online"> Remote / online</label>
-            <label class="toggle"><input type="checkbox" name="time" value="A few hours a month"> A few hours a month</label>
-          </fieldset>
-          <label class="full">Languages you speak<input class="input" name="lang" placeholder="e.g. Hindi, English, Marathi"></label>
-          <label class="full">Anything else? (skills, organisation, ideas)<textarea class="input" name="msg" rows="3"></textarea></label>
-          <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-          <label class="toggle full"><input type="checkbox" name="consent" required> I agree that Praanvayu may contact me about volunteering. *</label>
-          <div class="full"><button class="btn primary" type="submit">Sign me up →</button> <span class="note">Your details go only to the Praanvayu volunteer team.</span></div>
-        </form>
-        <div id="volDone" hidden></div>
+        <div class="hero-cta" style="margin-top:16px">
+          <a class="btn primary wa" href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer"><svg class="wa-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Join our volunteer community</a>
+        </div>
       </div>
     </section>
 
@@ -494,9 +494,9 @@
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
             <span>Stay connected with us <b>@_praanvayu_</b></span>
           </a>
-          <a class="foot-btn vol" href="#volunteer" data-goto="act" data-anchor="volunteer">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-            <span>Help clean the air <b>Volunteer with us →</b></span>
+          <a class="foot-btn vol wa" href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer">
+            <svg class="wa-ico" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>Help clean the air <b>Join our volunteer community →</b></span>
           </a>
         </div>
       </div>
@@ -504,7 +504,6 @@
     <p class="copy">© 2026 Praanvayu</p>
   </footer>
 
-  <script src="js/config.js"></script>
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/learn.js"></script>

@@ -21,7 +21,7 @@
   const rendered = new Set();
   let currentSub = SUB_IDS[0];
   // Anchors inside a tab (e.g. #volunteer) open their tab, then scroll.
-  const ANCHOR_TAB = { volunteer: 'act', 'pledge-card': 'act', habits: 'act', community: 'act', report: 'act', officials: 'act', purifier: 'protect', masks: 'protect', references: 'resources' };
+  const ANCHOR_TAB = { volunteer: 'act', 'pledge-card': 'act', habits: 'act', solutions: 'act', community: 'act', report: 'act', officials: 'act', purifier: 'protect', masks: 'protect', references: 'resources' };
 
   function setHash(h) {
     try { history.replaceState(null, '', '#' + h); } catch (e) { /* some browsers block this on file:// */ }
@@ -110,4 +110,40 @@
   });
   window.addEventListener('hashchange', () => route(location.hash.slice(1)));
   route(location.hash.slice(1) || 'overview');
+})();
+
+// Overview hero: rotate through headline facts every 10 seconds.
+(function () {
+  const deck = document.getElementById('heroDeck');
+  const dots = document.getElementById('heroDots');
+  if (!deck || !dots) return;
+  const slides = [...deck.querySelectorAll('.hero-slide')];
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur = 0, timer = null;
+  const btns = slides.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Show fact ${i + 1} of ${slides.length}`);
+    b.addEventListener('click', () => { show(i); start(); });
+    dots.appendChild(b);
+    return b;
+  });
+  function show(i) {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => { s.classList.toggle('is-on', k === cur); s.setAttribute('aria-hidden', String(k !== cur)); });
+    btns.forEach((b, k) => b.setAttribute('aria-current', String(k === cur)));
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function start() {
+    stop();
+    if (still) return;
+    timer = setInterval(() => { if (!document.hidden && deck.offsetParent) show(cur + 1); }, 10000);
+  }
+  // Pause while someone is reading or tabbing through the deck.
+  deck.addEventListener('mouseenter', stop);
+  deck.addEventListener('mouseleave', start);
+  deck.addEventListener('focusin', stop);
+  deck.addEventListener('focusout', start);
+  show(0);
+  start();
 })();

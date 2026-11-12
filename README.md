@@ -23,26 +23,17 @@ The only external resource is Google Fonts (Baloo 2 and Inter). There's no live 
   - Myth or fact
 - **Take action & volunteer**
   - A clean-air habits check
+  - Everyday solutions: 26 practical steps for one person or household, filtered by category (getting around, kitchen and home, waste, energy, winter and festivals) and tagged by cost
   - A shareable pledge, saved on the device
   - Ideas for your community
   - How to report pollution and speak up (SAMEER, Swachhata, RTI and more)
   - **Find your local officials:** search by pin code, city, district, state or locality to get the municipal helplines, ward or zone offices, state grievance portal and pollution control board that handle garbage pickup (ghanta gaadi), open burning and dust. See below.
-  - A volunteer sign-up form with nine roles, such as Clean Air Ambassador, Citizen science and Data & tech
-- **Resources & references:** links for checking the air, government policy, health evidence and research, 24 numbered references, and a searchable glossary.
+  - Five volunteer roles (Clean Air Ambassador, Green cover drives, Burn-free campaigns, Policy & research, Design & storytelling) and a link to join the volunteer WhatsApp community
+- **Resources & references:** links for checking the air, government policy, health evidence and research, 32 numbered references, and a searchable glossary.
 
 ## Volunteer sign-ups
 
-Out of the box, the volunteer form opens a pre-filled email to `contact@praanvayu.org`. To collect sign-ups in a Google Sheet instead:
-
-1. Create a Google Sheet, for example "Praanvayu volunteers".
-2. Open **Extensions → Apps Script**, paste in `volunteer-sheet.gs` and save.
-3. Choose **Deploy → New deployment**, type **Web app**, with **Execute as: Me** and **Who has access: Anyone**. Authorize it and copy the URL ending in `/exec`.
-4. Paste that URL into `volunteerEndpoint` in `js/config.js`.
-5. Send a test sign-up and check for a new row in the **Volunteers** tab.
-
-The script appends one row per sign-up (`submitted_at`, `name`, `email`, `phone`, `city`, `roles`, `availability`, `languages`, `message`). It guards against spreadsheet formula injection and silently drops bots that fill the hidden `website` field. After editing the script, deploy a **New version**, or the old code keeps running.
-
-Apps Script doesn't send CORS headers, so the form posts in `no-cors` mode and can't read the response. If the request fails at the network level, the page falls back to the email option.
+Volunteers join through the WhatsApp community link in `index.html`. The site has no sign-up form.
 
 ## Local officials finder
 
@@ -69,13 +60,11 @@ To add a city, add it to `CITY` (state code, the district names as India Post sp
 Praanvayu/
 ├── index.html          All tabs and sections
 ├── styles.css          Styling
-├── volunteer-sheet.gs  Google Apps Script that saves volunteer sign-ups to a Sheet
 ├── Logo.png            Logo (not used by the page)
 ├── img/
 │   ├── logo_mark.png   Header mark and favicon
 │   └── logo_full.png   Full logo
 ├── js/
-│   ├── config.js       Settings (volunteerEndpoint)
 │   ├── data.js         Content: AQI bands, pollutants, sources, source shares, quiz, stats, references, glossary
 │   ├── ui.js           Shared helpers, saved data, AQI and PM2.5 conversions
 │   ├── learn.js        Overview and Learn tabs

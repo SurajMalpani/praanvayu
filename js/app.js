@@ -21,7 +21,7 @@
   const rendered = new Set();
   let currentSub = SUB_IDS[0];
   // Anchors inside a tab (e.g. #volunteer) open their tab, then scroll.
-  const ANCHOR_TAB = { volunteer: 'act', 'pledge-card': 'act', habits: 'act', solutions: 'act', community: 'act', report: 'act', officials: 'act', purifier: 'protect', masks: 'protect', references: 'resources' };
+  const ANCHOR_TAB = { volunteer: 'act', 'pledge-card': 'act', habits: 'act', solutions: 'act', community: 'act', report: 'act', officials: 'act', faq: 'act', purifier: 'protect', masks: 'protect', references: 'resources' };
 
   // Analytics: one event per tab or Learn topic viewed. Does nothing if Google Analytics is blocked.
   let lastView = null;

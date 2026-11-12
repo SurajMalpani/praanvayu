@@ -524,3 +524,13 @@ table.compare.small { margin-top: 6px; background: #fff; border-radius: 10px; }
 .wa-fab:hover { transform: translateY(-2px); }
 .wa-fab.is-hidden { opacity: 0; transform: translateY(12px); pointer-events: none; }
 @media (max-width: 480px) { .wa-fab { padding: 12px; } .wa-fab span { display: none; } }
+
+/* ---------- FAQ ---------- */
+.faq details { border-top: 1px solid var(--line); }
+.faq details:first-child { border-top: 0; }
+.faq summary { cursor: pointer; padding: 12px 28px 12px 0; font-weight: 600; position: relative; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 4px; top: 9px; font-size: 1.3rem; color: var(--teal-deep); }
+.faq details[open] summary::after { content: '\2212'; }
+.faq summary:hover { color: var(--teal-deep); }
+.faq p { margin: 0 0 14px; color: var(--muted); font-size: .93rem; max-width: 880px; }

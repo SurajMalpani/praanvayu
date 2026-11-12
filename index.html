@@ -85,7 +85,7 @@
         </a>
         <a href="#act" class="pillar b" data-goto="act">
           <h4>🌳 Act</h4>
-          <p>Check your habits, pick <b>everyday solutions</b>, take the <b>pledge</b>, report polluters, and <b>volunteer</b> with Praanvayu in your city.</p>
+          <p>Pick <b>everyday solutions</b>, check your habits, take the <b>pledge</b>, report polluters, and <b>volunteer</b> with Praanvayu in your city.</p>
           <span class="pillar-go">Take action →</span>
         </a>
       </div>
@@ -109,6 +109,9 @@
           <button class="btn small ghost" type="button" id="quizNew">↻ New questions</button>
         </div>
         <div id="quiz" class="quiz"></div>
+      </div>
+      <div class="next-row">
+        <button class="btn primary" type="button" data-goto="air">Next: learn what’s in the air →</button>
       </div>
     </section>
 
@@ -265,7 +268,9 @@
         </ul>
         <p class="note" style="margin:8px 0 0">This guide is educational and not a substitute for medical advice.</p>
       </div>
-      <button class="btn primary next-sub" type="button" data-goto="protect">Next: how to protect yourself →</button>
+      <div class="next-row">
+        <button class="btn primary" type="button" data-goto="protect">Next: how to protect yourself →</button>
+      </div>
       </div>
     </section>
 
@@ -335,17 +340,8 @@
         </div>
         <div class="myth-grid" id="myths"></div>
       </div>
-
-      <div class="card">
-        <h3>More everyday habits</h3>
-        <div class="tool-grid">
-          <div class="tool"><h4>📱 Check before you step out</h4><p>Make AQI part of your weather check. The SAMEER app (CPCB) and SAFAR show hourly readings.</p></div>
-          <div class="tool"><h4>🛣️ Choose cleaner routes</h4><p>Walk or cycle on side streets and through parks; pollution drops sharply even a block away from heavy traffic.</p></div>
-          <div class="tool"><h4>🚗 In the car</h4><p>Keep windows up and set the AC to recirculate in heavy traffic. Replace the cabin filter regularly.</p></div>
-          <div class="tool"><h4>🏋️ Exercise smart</h4><p>Exercise is still good for you. On bad days, move it indoors or to the cleanest part of the day.</p></div>
-          <div class="tool"><h4>🥗 Look after yourself</h4><p>Stay hydrated, eat fruit and vegetables, and keep asthma and heart conditions well controlled.</p></div>
-          <div class="tool"><h4>🏫 Ask your school</h4><p>Ask schools to check AQI before outdoor assemblies and sports, and to run purifiers in classrooms.</p></div>
-        </div>
+      <div class="next-row">
+        <button class="btn primary" type="button" data-goto="act">Next: take action →</button>
       </div>
     </section>
 
@@ -356,8 +352,8 @@
         <h2>Take action for clean air</h2>
         <p class="lead">Clean air is a shared resource: no one can buy it just for themselves. Every source in <a href="#sources" data-goto="sources">Learn → What causes it</a> can be cut, and each one needs people to change habits, speak up and organise. Start with yourself, then your street, then your city.</p>
         <nav class="subnav" aria-label="Take action sections">
-          <a href="#habits" data-jump="habits">Your habits</a>
           <a href="#solutions" data-jump="solutions">Everyday solutions</a>
+          <a href="#habits" data-jump="habits">Your habits</a>
           <a href="#pledge-card" data-jump="pledge-card">Take the pledge</a>
           <a href="#community" data-jump="community">In your community</a>
           <a href="#report" data-jump="report">Report &amp; speak up</a>
@@ -366,29 +362,29 @@
         </nav>
       </div>
 
+      <div class="card" id="solutions">
+        <div class="card-head">
+          <h3>1 · Everyday solutions for cleaner air</h3>
+          <p>Things one person or one household can do, grouped by where they fit in your day. Most cost nothing and many save money. Start with the high-impact switches, then browse by category and choose one or two to start this week.</p>
+        </div>
+        <div class="chips small" id="solCats" role="group" aria-label="Solution categories"></div>
+        <div class="sol-grid" id="solGrid" aria-live="polite"></div>
+        <div class="sol-foot">
+          <span class="note" id="solCount"></span>
+          <span class="sol-key"><span class="sol-tag hi">⭐ High impact</span><span class="sol-tag free">Free</span><span class="sol-tag save">Saves money</span><span class="sol-tag cost">Small cost</span><span class="sol-tag once">One-time switch</span></span>
+        </div>
+        <p class="note" style="margin:12px 0 0">One household's share is small; the same step taken across a colony or a city is not. The largest sources, industry and power plants<a class="ref" href="#references" data-ref="18">[18]</a>, also need rules and enforcement, so <a href="#report" data-jump="report">reporting and speaking up</a> matter as much as habits.</p>
+      </div>
+
       <div class="card" id="habits">
         <div class="card-head">
-          <h3>1 · Your clean-air habits check</h3>
+          <h3>2 · Your clean-air habits check</h3>
           <p>Seven quick questions. There are no wrong answers, only next steps.</p>
         </div>
         <div class="habit-wrap">
           <div id="habitsList"></div>
           <aside class="info sticky" id="habitScore" aria-live="polite"></aside>
         </div>
-      </div>
-
-      <div class="card" id="solutions">
-        <div class="card-head">
-          <h3>2 · Everyday solutions for cleaner air</h3>
-          <p>Things one person or one household can do, grouped by where they fit in your day. Most cost nothing and many save money. Pick a category, then choose one or two to start this week.</p>
-        </div>
-        <div class="chips small" id="solCats" role="group" aria-label="Solution categories"></div>
-        <div class="sol-grid" id="solGrid" aria-live="polite"></div>
-        <div class="sol-foot">
-          <span class="note" id="solCount"></span>
-          <span class="sol-key"><span class="sol-tag free">Free</span><span class="sol-tag save">Saves money</span><span class="sol-tag cost">Small cost</span><span class="sol-tag once">One-time switch</span></span>
-        </div>
-        <p class="note" style="margin:12px 0 0">One household's share is small; the same step taken across a colony or a city is not. The largest sources, industry and power plants<a class="ref" href="#references" data-ref="18">[18]</a>, also need rules and enforcement, so <a href="#report" data-jump="report">reporting and speaking up</a> matter as much as habits.</p>
       </div>
 
       <div class="card" id="pledge-card">
@@ -477,8 +473,13 @@
           <dl class="glossary" id="glossary"></dl>
         </div>
       </div>
+      <div class="next-row">
+        <button class="btn primary" type="button" data-goto="act">Take action →</button>
+      </div>
     </section>
   </main>
+
+  <a class="wa-fab" id="waFab" href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer" aria-label="Join our volunteer community on WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>Join community</span></a>
 
   <footer class="site-footer">
     <div class="flagbar thin" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -488,7 +489,7 @@
         <p>This guide is educational. Figures come from WHO, CPCB, The Lancet Planetary Health, HEI and other sources listed in the Resources tab; check them before relying on any number. Nothing here is medical advice.</p>
       </div>
       <div>
-        <p><b>Contact</b><br>contact@praanvayu.org</p>
+        <p><b>Contact</b><br></p>
         <div class="foot-btns">
           <a class="foot-btn insta" href="https://www.instagram.com/_praanvayu_/" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>

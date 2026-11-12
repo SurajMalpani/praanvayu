@@ -140,30 +140,31 @@
         <div class="big">${pts} / ${max} · ${label}</div>
         <div class="meter"><i style="width:${pct}%"></i></div>
         <p class="note">${done} of ${HABITS.length} answered</p>
-        ${tips.length ? `<p class="mini-h">Your next steps</p><ul class="ticks">${tips.map(t => `<li>${t}</li>`).join('')}</ul>` : done === HABITS.length ? '<p>You\u2019re already doing the big things. Now bring your neighbours along: see the volunteer section below.</p>' : ''}`;
+        ${tips.length ? `<p class="mini-h">Your next steps</p><ul class="ticks">${tips.map(t => `<li>${t}</li>`).join('')}</ul>` : done === HABITS.length ? '<p>You\u2019re already doing the big things. Now bring your neighbours along: see the volunteer section below.</p>' : ''}
+        ${done === HABITS.length ? '<div class="hero-cta"><button class="btn primary" type="button" data-jump="pledge-card">Next: take the pledge →</button></div>' : ''}`;
     }
     score();
   }
 
-  // Everyday solutions: [category, icon, title, text, tag]. Tags: free, save (saves money), cost (small cost), once (one-time switch).
-  const SOL_CATS = [['travel', '🚲 Getting around'], ['home', '🍳 Kitchen & home'], ['waste', '♻️ Waste'], ['energy', '💡 Energy'], ['season', '🧣 Winter & festivals'], ['all', 'All']];
+  // Everyday solutions: [category, icon, title, text, tag, highImpact]. highImpact is a rank (1 = shown first) for the High impact view. Tags: free, save (saves money), cost (small cost), once (one-time switch).
+  const SOL_CATS = [['high', '⭐ High impact'], ['travel', '🚲 Getting around'], ['home', '🍳 Kitchen & home'], ['waste', '♻️ Waste'], ['energy', '💡 Energy'], ['season', '🧣 Winter & festivals'], ['all', 'All']];
   const SOL_TAGS = { free: 'Free', save: 'Saves money', cost: 'Small cost', once: 'One-time switch' };
   const SOLUTIONS = [
     ['travel', '🚶', 'Walk or cycle the short trips', 'Engines pollute most in the first few minutes, before they warm up, so short drives are the dirtiest per kilometre. For anything under 2 km, go on foot or by cycle.', 'free'],
-    ['travel', '🚇', 'Share the commute', 'Vehicles make up about half of the PM2.5 from Delhi’s own sources in winter [24]. Swap two solo car days a week for the metro, a bus or a car-pool.', 'save'],
+    ['travel', '🚇', 'Share the commute', 'Vehicles make up about half of the PM2.5 from Delhi’s own sources in winter [24]. Swap two solo car days a week for the metro, a bus or a car-pool.', 'save', 4],
     ['travel', '🔧', 'Service on time, keep the PUC valid', 'A poorly tuned engine can emit several times more. A clean air filter and correctly inflated tyres also cut your fuel bill.', 'save'],
     ['travel', '🚦', 'Engine off when you wait', 'Switch off at signals longer than 30 seconds, at railway crossings and outside school gates, where children breathe the exhaust.', 'free'],
     ['travel', '📦', 'Fewer, slower deliveries', 'Combine your orders and skip ten-minute delivery when you can wait. Every rush order is one more vehicle trip.', 'free'],
-    ['travel', '⚡', 'Make your next vehicle electric', 'No tailpipe exhaust at street level. Scooters and autos are the easiest switch, and CNG is a cleaner step than diesel.', 'once'],
+    ['travel', '⚡', 'Switch to an electric scooter or car', 'No tailpipe exhaust at street level. Scooters and autos are the easiest switch, and CNG is a cleaner step than diesel.', 'once', 2],
 
-    ['home', '🔥', 'Cook on LPG, PNG or induction', 'Clean cooking protects the cook first, then the street. Keep wood, coal and kerosene out of the kitchen, and check eligibility for an Ujjwala connection.', 'once'],
+    ['home', '🔥', 'Cook on LPG, PNG or induction', 'Clean cooking protects the cook first, then the street. Keep wood, coal and kerosene out of the kitchen, and check eligibility for an Ujjwala connection.', 'once', 3],
     ['home', '🌬️', 'Vent the kitchen', 'Run a chimney or exhaust fan, or open a window, while frying and for a few minutes after. Even LPG cooking releases fine particles.', 'free'],
     ['home', '🪔', 'Go easy on incense and coils', 'Agarbatti, dhoop and mosquito coils all give off PM2.5. Use nets and window screens, and light incense sparingly with a window open.', 'free'],
     ['home', '🚭', 'Keep home and car smoke-free', 'Tobacco smoke is one of the largest sources of indoor PM2.5, and it lingers in rooms and car seats long after the cigarette is out.', 'free'],
     ['home', '🎨', 'Choose low-VOC paints and cleaners', 'Pick water-based, low-VOC paints and skip aerosol room fresheners. VOCs pollute the room and help form ozone outdoors.', 'cost'],
     ['home', '🏗️', 'Renovate without the dust', 'Cover sand and debris, cut tiles and stone wet, and send debris away in covered vehicles. Ask for fly-ash or AAC blocks instead of kiln-fired bricks.', 'cost'],
 
-    ['waste', '🚫', 'Never burn garbage or leaves', 'It is banned under the Solid Waste Management Rules [17] and puts toxic smoke at nose height. If you see a fire, report it on the Swachhata or SAMEER app.', 'free'],
+    ['waste', '🚫', 'Never burn garbage or leaves', 'It is banned under the Solid Waste Management Rules [17] and puts toxic smoke at nose height. If you see a fire, report it on the Swachhata or SAMEER app.', 'free', 5],
     ['waste', '🗑️', 'Segregate wet, dry and hazardous', 'Sorted waste gets collected and recycled. Mixed waste is what ends up dumped, set alight or feeding landfill fires.', 'free'],
     ['waste', '🌱', 'Compost peels and leaves', 'A bin, a pit or a terracotta composter turns kitchen scraps into manure. Spread fallen leaves as mulch around plants instead of sweeping them into a pile to burn.', 'save'],
     ['waste', '🛍️', 'Carry your own bag and bottle', 'Less packaging means less plastic to be dumped or burned, and burning plastic gives off some of the most toxic smoke there is.', 'free'],
@@ -171,8 +172,8 @@
 
     ['energy', '💡', 'Use less power', 'Coal power plants add about 13% of the PM2.5 Indians breathe [18]. Fit LEDs, switch off at the plug and run full loads in the washing machine.', 'save'],
     ['energy', '❄️', 'Set the AC to 24–26°C', 'Each degree warmer saves electricity. Use a ceiling fan along with the AC, and choose 5-star appliances when you replace old ones.', 'save'],
-    ['energy', '☀️', 'Put solar on your roof', 'Rooftop panels cut the coal burned for your home. The PM Surya Ghar scheme gives households a central subsidy of up to ₹78,000 [32].', 'once'],
-    ['energy', '🔌', 'Back up with batteries, not diesel', 'Diesel generators push exhaust out at street level, and diesel exhaust is a known cause of cancer [30]. Use an inverter at home and ask your society to move to cleaner backup.', 'once'],
+    ['energy', '☀️', 'Go solar with the government subsidy', 'Rooftop panels cut the coal burned for your home. The PM Surya Ghar scheme gives households a central subsidy of up to ₹78,000 [32].', 'once', 1],
+    ['energy', '🔌', 'Back up with batteries, not diesel', 'Diesel generators push exhaust out at street level, and diesel exhaust is a known cause of cancer [30]. Use an inverter at home and ask your society to move to cleaner backup.', 'once', 6],
 
     ['season', '🧣', 'Stay warm without a fire', 'Use layers, blankets and an electric heater instead of an angithi or bonfire. Never burn coal or wood in a closed room: it can cause deadly CO poisoning.', 'free'],
     ['season', '💂', 'Give your guard a heater', 'Night guards often burn wood or waste to keep warm. CAQM has asked Delhi’s RWAs to give security and service staff electric heaters [31]; any household or society can do the same.', 'cost'],
@@ -185,13 +186,13 @@
     const grid = document.getElementById('solGrid');
     const count = document.getElementById('solCount');
     const draw = cat => {
-      const list = SOLUTIONS.filter(s => cat === 'all' || s[0] === cat);
-      grid.innerHTML = list.map(([, ic, t, d, tag]) => `
-        <div class="sol"><span class="sol-i" aria-hidden="true">${ic}</span><div><h4>${t}</h4><p>${cite(d)}</p><span class="sol-tag ${tag}">${SOL_TAGS[tag]}</span></div></div>`).join('');
+      const list = cat === 'high' ? SOLUTIONS.filter(s => s[5]).sort((x, y) => x[5] - y[5]) : SOLUTIONS.filter(s => cat === 'all' || s[0] === cat);
+      grid.innerHTML = list.map(([, ic, t, d, tag, hi]) => `
+        <div class="sol${hi ? ' hi' : ''}"><span class="sol-i" aria-hidden="true">${ic}</span><div><h4>${t}</h4><p>${cite(d)}</p>${hi ? '<span class="sol-tag hi">⭐ High impact</span> ' : ''}<span class="sol-tag ${tag}">${SOL_TAGS[tag]}</span></div></div>`).join('');
       count.textContent = `${list.length} of ${SOLUTIONS.length} solutions shown`;
     };
-    chipGroup(document.getElementById('solCats'), SOL_CATS, 'travel', draw, 'g');
-    draw('travel');
+    chipGroup(document.getElementById('solCats'), SOL_CATS, 'high', draw, 'g');
+    draw('high');
   }
 
   const PLEDGES = [
@@ -213,7 +214,7 @@
     const update = () => {
       const on = [...el.querySelectorAll('input:checked')].map(x => +x.value);
       store.set('pv-pledges', on);
-      st.innerHTML = `<b>${on.length} of ${PLEDGES.length}</b> pledges taken${on.length === PLEDGES.length ? ' · Thank you! 🌿' : ''}`;
+      st.innerHTML = `<b>${on.length} of ${PLEDGES.length}</b> pledges taken${on.length === PLEDGES.length ? ' · Thank you! 🌿 Ready for the next step? <a href="https://chat.whatsapp.com/Cm92nCbNW0DE4THA9cEZMb" target="_blank" rel="noopener noreferrer"><b>Join our volunteer community →</b></a>' : ''}`;
     };
     el.addEventListener('change', update);
     update();

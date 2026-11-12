@@ -147,3 +147,15 @@
   show(0);
   start();
 })();
+
+// Floating WhatsApp button: step aside whenever another join button is already on screen.
+(function () {
+  const fab = document.getElementById('waFab');
+  if (!fab || !('IntersectionObserver' in window)) return;
+  const seen = new Set();
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+    fab.classList.toggle('is-hidden', seen.size > 0);
+  });
+  document.querySelectorAll('a.wa').forEach(a => io.observe(a));
+})();
